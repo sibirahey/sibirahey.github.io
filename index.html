@@ -1,34 +1,353 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-  <title>Eduardo Fernandez</title>
-  <link rel = "stylesheet" type = "text/css" href = "main.css">
-  <script src="https://use.fontawesome.com/b1eef53ed5.js"></script>
-  <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>sibiapps IA — Consultoría en IA Generativa con RAG</title>
+    <meta name="description"
+          content="Consultoría en IA Generativa con RAG para empresas medianas: evaluación, diseño, prototipos y plan de operación con foco en valor de negocio."/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <style>
+        :root {
+            --bg: #0b1220; /* azul muy oscuro para fondo general */
+            --bg-2: #0f1a2e; /* sección alterna */
+            --card: #111d34; /* tarjetas */
+            --txt: #eaf2ff; /* texto principal */
+            --muted: #b9c6e1; /* texto secundario */
+            --acc: #4da3ff; /* acento principal */
+            --acc-2: #79b7ff; /* acento suave */
+            --ring: rgba(77, 163, 255, .35);
+            --maxw: 1040px;
+            --radius: 16px;
+            --shadow: 0 10px 30px rgba(0, 0, 0, .35);
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html, body {
+            height: 100%
+        }
+
+        body {
+            margin: 0;
+            font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+            color: var(--txt);
+            background: var(--bg);
+            line-height: 1.6;
+        }
+
+        a {
+            color: var(--acc);
+            text-decoration: none
+        }
+
+        a:hover {
+            text-decoration: underline
+        }
+
+        .wrap {
+            max-width: var(--maxw);
+            margin: 0 auto;
+        }
+
+        header {
+            position: relative;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            padding: 96px 0 64px;
+            overflow: hidden;
+        }
+
+        #bg-canvas {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            display: block;
+        }
+
+        .hero {
+            backdrop-filter: blur(4px);
+        }
+
+        .brand {
+            font-weight: 700;
+            letter-spacing: .4px;
+            color: var(--acc-2);
+            text-transform: uppercase;
+            font-size: .9rem;
+        }
+
+        .title {
+            font-size: clamp(28px, 5vw, 48px);
+            line-height: 1.15;
+            margin: 10px 0 12px;
+            margin-bottom: 18px;
+        }
+
+        .subtitle {
+            font-size: clamp(16px, 2.4vw, 20px);
+            color: var(--muted);
+            max-width: 900px;
+        }
+
+        .cta {
+            margin-top: 24px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 18px;
+            border-radius: 999px;
+            background: var(--acc);
+            color: #061024;
+            font-weight: 700;
+            border: 0;
+            cursor: pointer;
+            box-shadow: 0 8px 20px var(--ring);
+        }
+
+        .btn:hover {
+            filter: brightness(1.05)
+        }
+
+        section {
+            padding: 96px 0
+        }
+
+        .alt {
+            background: var(--bg-2)
+        }
+
+        .grid {
+            display: grid;
+            gap: 20px
+        }
+
+        @media (min-width: 900px) {
+            .grid-2 {
+                grid-template-columns:1fr 1fr
+            }
+
+            .grid-3 {
+                grid-template-columns:repeat(3, 1fr)
+            }
+
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid rgba(255, 255, 255, .06);
+            border-radius: var(--radius);
+            padding: 24px;
+            box-shadow: var(--shadow);
+        }
+
+        h2 {
+            margin: 0 0 16px;
+            font-size: clamp(22px, 3.2vw, 32px)
+        }
+
+        h3 {
+            margin: 0 0 8px;
+            font-size: 18px
+        }
+
+        ul {
+            margin: 8px 0 0 18px
+        }
+
+        .faq details {
+            background: var(--card);
+            border: 1px solid rgba(255, 255, 255, .06);
+            border-radius: 12px;
+            padding: 14px 16px;
+        }
+
+        .faq summary {
+            cursor: pointer;
+            font-weight: 600
+        }
+
+        .faq details + details {
+            margin-top: 10px
+        }
+
+        .about {
+            display: grid;
+            gap: 18px;
+        }
+
+        @media (min-width: 900px) {
+            .about {
+                grid-template-columns: 2fr 1fr
+            }
+        }
+
+        .social a {
+            margin-right: 14px
+        }
+
+        footer {
+            padding: 28px 0;
+            border-top: 1px solid rgba(255, 255, 255, .08);
+            color: var(--muted);
+            font-size: .95rem;
+        }
+    </style>
 </head>
 <body>
-<canvas id = "fondo"></canvas>
-<div id = "container">
-    <h1 id = "name">Eduardo Fern&aacute;ndez</h1>
-    <!--h2 id = "description"></h2-->
-    <div id = "social">
-      <a href = "https://mx.linkedin.com/in/jefernandezp" target = "_blank"><i class="fa fa-linkedin-square fa-3x" aria-hidden="true"></i></a>
-      <a href = "https://github.com/sibirahey" target = "_blank"><i class="fa fa-github fa-3x" aria-hidden="true"></i></a>
-      <a href = "https://twitter.com/sibirahey" target = "_blank"><i class="fa fa-twitter fa-3x" aria-hidden="true"></i></a>
-      <a href = "mailto:jefdez90@gmail.com" target = "_blank"><i class="fa fa-envelope fa-3x" aria-hidden="true"></i></a>
-      <a href = "EduardoFernandezCV.pdf" target = "_blank"><i class="fa fa-download fa-3x" aria-hidden="true" style = "padding-left: 8px;"></i></a>
+<canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+<header>
+    <div class="wrap hero">
+        <div class="brand">sibiapps IA</div>
+        <h1 class="title">Consultoría en IA Generativa con RAG</h1>
+        <p class="subtitle">
+            Evalúo, diseño e implemento soluciones de IA Generativa con RAG para que tu equipo acceda a conocimiento
+            interno con precisión y velocidad. Enfoque práctico para empresas medianas.
+        </p>
+        <div class="cta">
+            <a class="btn" href="mailto:eduardo.fernandez@sibiapps.com">Escríbeme</a>
+        </div>
     </div>
-  </div>
-</body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/trianglify/0.4.0/trianglify.min.js"></script>
+</header>
+
+<main>
+    <section id="servicios" class="wrap">
+        <h2>Servicios</h2>
+        <div class="grid grid-2">
+            <div class="card">
+                <h3>IA Generativa con RAG</h3>
+                <ul>
+                    <li>Evaluación de casos de uso y de tus fuentes de información</li>
+                    <li>Diseño de arquitectura: ingesta, embeddings, orquestación, seguridad</li>
+                    <li>Prototipo funcional con mediciones de calidad</li>
+                    <li>Plan para pasar a producción y operación</li>
+                </ul>
+                <p style="margin-top:12px;color:var(--muted)">
+                    En proceso: consultoría productivizada con cuota mensual fija y entregables por objetivo.
+                </p>
+            </div>
+            <div class="card">
+                <h3>Entrega y acompañamiento</h3>
+                <ul>
+                    <li>Iteraciones cortas, demos y retro semanal</li>
+                    <li>Gobernanza de datos y controles de acceso</li>
+                    <li>Handoff documentado para tu equipo</li>
+                    <li>Opcional: capacitación y guías de uso</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="alt">
+        <div class="wrap">
+            <h2>Beneficios</h2>
+            <div class="grid grid-3">
+                <div class="card"><strong>Time-to-value corto</strong><br/>Prototipos en semanas, no meses.</div>
+                <div class="card"><strong>Menos alucinación</strong><br/>Respuestas con contexto y trazabilidad a
+                    fuentes.
+                </div>
+                <div class="card"><strong>Conocimiento utilizable</strong><br/>Documentación consultable vía RAG.</div>
+                <div class="card"><strong>Costos controlados</strong><br/>Alcance claro por objetivos.</div>
+                <div class="card"><strong>Acompañamiento experto</strong><br/>Decisiones técnicas con foco de negocio.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="wrap">
+        <h2>Cómo trabajo</h2>
+        <div class="grid grid-3">
+            <div class="card"><strong>1) Descubrimiento</strong><br/>30–60 min para entender objetivos y restricciones.
+            </div>
+            <div class="card"><strong>2) Propuesta técnica</strong><br/>Alcance, hitos, estimación y riesgos.</div>
+            <div class="card"><strong>3) Ejecución guiada</strong><br/>Iteraciones, entregables verificables y handoff
+                claro.
+            </div>
+        </div>
+    </section>
+
+    <section class="alt">
+        <div class="wrap">
+            <h2>Casos de uso de RAG</h2>
+            <div class="grid grid-2">
+                <div class="card">
+                    <ul>
+                        <li>Asistente interno para procesos y políticas</li>
+                        <li>Soporte a clientes/agentes basado en documentos</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <ul>
+                        <li>Búsqueda inteligente en contratos y reportes</li>
+                        <li>Onboarding y capacitación guiada</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="wrap faq" id="faqs">
+        <h2>FAQs</h2>
+        <details>
+            <summary>¿Qué es RAG y por qué me sirve?</summary>
+            <div>RAG combina un LLM con tus documentos para responder con contexto propio, reduciendo alucinaciones y
+                permitiendo citar fuentes.
+            </div>
+        </details>
+        <details>
+            <summary>¿Necesito documentos perfectos?</summary>
+            <div>No. Empezamos con lo que haya y diseñamos una ingesta con limpieza y versionado básico.</div>
+        </details>
+        <details>
+            <summary>¿Trabajas integrado o por entregables?</summary>
+            <div>Puedo integrarme a tu equipo o trabajar por objetivos con checkpoints semanales.</div>
+        </details>
+        <details>
+            <summary>¿Cómo manejan seguridad y privacidad?</summary>
+            <div>Accesos mínimos y almacenamiento bajo tu control. Políticas de datos acordadas desde el inicio.</div>
+        </details>
+        <details>
+            <summary>¿Haces desarrollo end-to-end?</summary>
+            <div>Sí cuando aplica; en otros casos entrego diseño/POC y acompaño a tu equipo hasta producción.</div>
+        </details>
+    </section>
+
+    <section class="alt" id="contacto">
+        <div class="wrap about">
+            <div>
+                <h2>Sobre mí y contacto</h2>
+                <p><strong>sibiapps IA — Eduardo Fernández</strong></p>
+                <p>Consultoría en <strong>IA Generativa con RAG</strong> para empresas medianas.</p>
+                <p>📧 <a href="mailto:eduardo.fernandez@sibiapps.com">eduardo.fernandez@sibiapps.com</a></p>
+                <div class="social">
+                    <a href="https://mx.linkedin.com/in/eduardofernandezandroid" target="_blank"
+                       rel="noopener">LinkedIn</a>
+                </div>
+            </div>
+            <div class="card">
+                <h3>¿Próximo paso?</h3>
+                <p>Agendemos una llamada corta para definir el primer objetivo y un plan de 2–3 semanas.</p>
+                <a class="btn" href="mailto:eduardo.fernandez@sibiapps.com">Escríbeme</a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="wrap">
+    <div>© <span id="year"></span> sibiapps IA. Todos los derechos reservados. • Aviso de privacidad (próximamente)
+    </div>
+</footer>
 <script>
-    var pattern = Trianglify({
-        width: window.innerWidth,
-        height: window.innerHeight,
-        cell_size: 80,
-        variance: "0.47",
-        x_colors:"YlOrRd"
-    });
-    pattern.canvas(document.getElementById("fondo"))
+    // Año dinámico
+    document.getElementById('year').textContent = new Date().getFullYear();
 </script>
+</body>
 </html>
